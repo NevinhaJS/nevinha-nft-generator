@@ -23,7 +23,8 @@ const drawerFactory = () => {
     const drawLayer = async (dnaLayer) => {
         const image = await loadImage(`${dnaLayer.location}${dnaLayer.selectedElement.fileName}`)
 
-        ctx.drawImage(image, dnaLayer.position.x, dnaLayer.position.y, dnaLayer.width, dnaLayer.height)
+        // ctx.drawImage(image, dnaLayer.position.x, dnaLayer.position.y, dnaLayer.width, dnaLayer.height)
+        ctx.drawImage(image, 0, 0, dnaLayer.width, dnaLayer.height)
     }
 
     const getCanvas = () => canvas
