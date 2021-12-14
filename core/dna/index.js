@@ -8,7 +8,7 @@ const dnaFactory = () => {
 
         return dna
     }
-    
+
     const setDNA = (nextDNA) => dna = nextDNA
     const getDNA = () => dna
 
