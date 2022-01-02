@@ -3,7 +3,7 @@ const { loadImage, createCanvas } = require('canvas');
 const { dimension, outputDir } = require('../../config')
 
 const drawerFactory = () => {
-    const canvas = createCanvas(dimension, dimension)
+    const canvas = createCanvas(dimension.width, dimension.height)
     const ctx = canvas.getContext('2d')
 
     const clear = () => {

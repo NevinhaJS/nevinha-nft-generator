@@ -1,5 +1,6 @@
 const fs = require('fs')
-const { outputDir } = require('../../config')
+const { outputDir } = require('../../config');
+const { collection } = require('../../config/base');
 
 const metadataBuilder = () => {
     const metadata = [];
@@ -44,7 +45,7 @@ const metadataBuilder = () => {
             "description": "Here I can put some description later",
             //TODO: put the right link
             "image": `ipfs://{{IPFS_URL}}/${edition}.png`,
-            "name": `Nevinhatar #${dna}`,
+            "name": `${collection} #${dna}`,
             edition,
             attributes: createAttributes(layers, dna),
         })
