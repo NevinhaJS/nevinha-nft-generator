@@ -6,16 +6,21 @@ const metadataBuilder = () => {
     const metadata = [];
 
     const generateLayersFromDNA = (layers, dna) => {
-        const dnaSegment = dna.toString().match(/.{1,2}/g);
+        const dnaSegment = dna.split('-')
+        console.log(dna)
 
-        const formatedLayers = layers.map(({ name, position, height, width, elements, location }, index) => ({
-            location,
-            name,
-            selectedElement: elements[dnaSegment[index] % elements.length],
-            width,
-            height,
-            position,
-        }))
+        const formatedLayers = layers.map(
+            ({ name, position, height, width, elements, location }, index) => {
+                return {
+                    location,
+                    name,
+                    selectedElement: elements[dnaSegment[index]],
+                    width,
+                    height,
+                    position,
+                }
+            }
+        )
 
         return { dna, layers: formatedLayers }
     }
@@ -28,7 +33,7 @@ const metadataBuilder = () => {
 
         const dnaAttr = {
             trait_type: "dna",
-            value: `${dna}`
+            value: `${dna.replace(/\-/g, '')}`
         }
 
         const birthday = {
@@ -45,7 +50,7 @@ const metadataBuilder = () => {
             "description": "Here I can put some description later",
             //TODO: put the right link
             "image": `ipfs://{{IPFS_URL}}/${edition}.png`,
-            "name": `${collection} #${dna}`,
+            "name": `${collection} #${dna.replace(/\-/g, '')}`,
             edition,
             attributes: createAttributes(layers, dna),
         })

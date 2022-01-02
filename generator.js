@@ -28,7 +28,7 @@ const generator = () => {
         let currentEdition = 1;
 
         while (currentEdition <= _edition) {
-            const currentDNA = dnaFactory.generateDNA((layers.length * 2) - 1)
+            const currentDNA = dnaFactory.generateDNA()
 
             if (dnaManager.hasDNA(currentDNA)) {
                 console.log('DNA already exists, genereting a new one...')

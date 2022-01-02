@@ -1,12 +1,17 @@
+const { layers } = require("../../config");
+
 const dnaFactory = () => {
     let dna = null;
 
-    const generateDNA = (baseNumber) => {
-        dna = Math.floor(
-            Number(`1e${baseNumber}`) * Math.random() + Number(`9e${baseNumber}`)
-        )
+    const generateDNA = () => {
 
-        return dna
+        const nextDNA = layers.map((layer) => {
+            return Math.round(Math.random() * (layer.elements.length - 1))
+        }).join('-')
+
+        setDNA(nextDNA)
+
+        return nextDNA
     }
 
     const setDNA = (nextDNA) => dna = nextDNA
