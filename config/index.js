@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const dimension = 1080;
+const dimension = {
+    width: 2888,
+    height: 2125
+};
 
 const rarity = [
     { key: "", val: "common" },
@@ -43,39 +46,46 @@ const getElements = (path) => {
 
 const layers = [
     {
+        location: `./images/background/`,
+        elements: getElements(`./images/background`),
+        name: 'background',
+        width: dimension.width,
+        height: dimension.height
+    },
+    {
         location: `./images/body/`,
         elements: getElements(`./images/body`),
         name: 'body',
-        width: dimension,
-        height: dimension
+        width: dimension.width,
+        height: dimension.height
     },
     {
-        location: `./images/head/`,
-        elements: getElements(`./images/head`),
-        name: 'head',
-        width: dimension,
-        height: dimension
-    },
-    {
-        location: `./images/mounth/`,
-        elements: getElements(`./images/mounth`),
-        name: 'mounth',
-        width: dimension,
-        height: dimension
+        location: `./images/cap/`,
+        elements: getElements(`./images/cap`),
+        name: 'cap',
+        width: dimension.width,
+        height: dimension.height
     },
     {
         location: `./images/eyes/`,
         elements: getElements(`./images/eyes`),
         name: 'eyes',
-        width: dimension,
-        height: dimension
+        width: dimension.width,
+        height: dimension.height
     },
     {
-        location: `./images/hair/`,
-        elements: getElements(`./images/hair`),
-        name: 'hair',
-        width: dimension,
-        height: dimension
+        location: `./images/gravata/`,
+        elements: getElements(`./images/gravata`),
+        name: 'gravata',
+        width: dimension.width,
+        height: dimension.height
+    },
+    {
+        location: `./images/nose/`,
+        elements: getElements(`./images/nose`),
+        name: 'nose',
+        width: dimension.width,
+        height: dimension.height
     }
 ]
 
