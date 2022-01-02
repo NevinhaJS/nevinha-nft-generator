@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const basePath = './images/';
 const dimension = {
     width: 2888,
     height: 2125
@@ -44,50 +45,21 @@ const getElements = (path) => {
         }))
 }
 
-const layers = [
-    {
-        location: `./images/background/`,
-        elements: getElements(`./images/background`),
-        name: 'background',
+const layers = fs.readdirSync(basePath).reduce((acc, path) => {
+    // TODO: add a blacklist for folders
+    if (path === '.DS_Store') return acc;
+
+    const location = basePath + path + '/';
+
+    return [...acc, {
+        location,
+        name: path,
+        elements: getElements(location),
         width: dimension.width,
-        height: dimension.height
-    },
-    {
-        location: `./images/body/`,
-        elements: getElements(`./images/body`),
-        name: 'body',
-        width: dimension.width,
-        height: dimension.height
-    },
-    {
-        location: `./images/cap/`,
-        elements: getElements(`./images/cap`),
-        name: 'cap',
-        width: dimension.width,
-        height: dimension.height
-    },
-    {
-        location: `./images/eyes/`,
-        elements: getElements(`./images/eyes`),
-        name: 'eyes',
-        width: dimension.width,
-        height: dimension.height
-    },
-    {
-        location: `./images/gravata/`,
-        elements: getElements(`./images/gravata`),
-        name: 'gravata',
-        width: dimension.width,
-        height: dimension.height
-    },
-    {
-        location: `./images/nose/`,
-        elements: getElements(`./images/nose`),
-        name: 'nose',
-        width: dimension.width,
-        height: dimension.height
-    }
-]
+        height: dimension.height,
+    }]
+}, [])
+
 
 module.exports = {
     layers,
