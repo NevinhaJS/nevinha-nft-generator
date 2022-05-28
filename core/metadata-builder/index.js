@@ -1,13 +1,13 @@
 const fs = require('fs')
 const { outputDir } = require('../../config');
 const { collection } = require('../../config/base');
+const metadataExtensor = require('../../modules/metadata-extensor');
 
 const metadataBuilder = () => {
     const metadata = [];
 
     const generateLayersFromDNA = (layers, dna) => {
         const dnaSegment = dna.split('-')
-        console.log(dna)
 
         const formatedLayers = layers.map(
             ({ name, position, height, width, elements, location }, index) => {
@@ -25,8 +25,8 @@ const metadataBuilder = () => {
         return { dna, layers: formatedLayers }
     }
 
-    const createAttributes = (dnaLayers, dna) => {
-        const attributes = dnaLayers.map(({ name, selectedElement: { rarity } }) => ({
+    const createAttributes = async (dnaLayers, dna) => {
+        const layerAttributes = dnaLayers.map(({ name, selectedElement: { rarity } }) => ({
             trait_type: name,
             value: rarity,
         }));
@@ -42,17 +42,21 @@ const metadataBuilder = () => {
             "value": Date.now(),
         }
 
-        return [...attributes, birthday, dnaAttr];
+        const basicAttributes = [...layerAttributes, birthday, dnaAttr];
+
+        const attributes = await metadataExtensor(basicAttributes);
+
+        return attributes;
     }
 
-    const createMetadataItem = ({ dna, layers }, edition) => {
+    const createMetadataItem = async ({ dna, layers }, edition) => {
         metadata.push({
             "description": "Here I can put some description later",
             //TODO: put the right link
             "image": `ipfs://{{IPFS_URL}}/${edition}.png`,
             "name": `${collection} #${dna.replace(/\-/g, '')}`,
             edition,
-            attributes: createAttributes(layers, dna),
+            attributes: await createAttributes(layers, dna),
         })
     }
 
