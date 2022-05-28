@@ -1,4 +1,7 @@
+const { METADATA_EXTENSOR_TYPES } = require("./constants");
+
 module.exports = {
-    ipfsURL: 'QmTQWFB6VTgCgw3BaGYoBsgTVcE1ZAJEf3Cfx1tBEh2wtd',
-    collection: 'avangers',
+    ipfsURL: 'Qmcc2oxrpTfcUmv7jcmwAFf1tvgtNhPRGuiRrfkpquadCx',
+    useExtensors: [METADATA_EXTENSOR_TYPES.CARD],
+    collection: 'NFTNevinha',
 }

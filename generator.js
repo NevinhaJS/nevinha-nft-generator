@@ -18,7 +18,8 @@ const generator = () => {
 
         await drawer.saveCanvas(currentEdition)
 
-        metadataBuilder.createMetadataItem(dnaLayers, currentEdition)
+        await metadataBuilder.createMetadataItem(dnaLayers, currentEdition)
+
         dnaManager.addDNA(dnaLayers.dna)
 
         console.log(`Generating edition ${currentEdition}`)
